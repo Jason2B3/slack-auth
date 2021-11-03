@@ -1,0 +1,4 @@
+LEFTOVER TASKS
+
+components/SignupPrompt.js and CheckEmail2.js
+Make this <a> link the user to another page

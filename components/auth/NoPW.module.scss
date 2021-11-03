@@ -1,0 +1,76 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h2 {
+    font-size: 48px;
+    margin-top: 22px;
+    margin-bottom: 10px;
+  }
+  a {
+    color: rgb(32, 113, 253);
+  }
+}
+.p1 {
+  margin-bottom: 32px;
+  font-size: 18px;
+}
+.p2 {
+  font-size: 15px;
+  margin-bottom: 24px;
+  &:after,
+  &:before {
+    content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+    text-decoration: line-through;
+    color: rgb(189, 185, 185);
+    width: 390px;
+    overflow-x: hidden;
+  }
+}
+
+.inp {
+  width: 390px;
+  font-size: 18px;
+  padding: 11px 40px 13px 12px;
+  margin-bottom: 20px;
+}
+.btn3 {
+  color: white;
+  background-color: indigo;
+  width: 390px;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 12px 16px 12px 16px;
+  font-weight: 700;
+  margin-bottom: 44px;
+  &:hover {
+    background-color: rgb(97, 31, 105);
+  }
+}
+
+// The following places the labels to the left most part of the input field
+.left {
+  font-size: 15px;
+  align-self: flex-start;
+  padding-bottom: 8px;
+  font-weight: 450;
+}
+
+.container2 {
+  width: 390px;
+}
+
+.btn4 {
+  color: black;
+  background-color: white;
+  width: 390px;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 12px 16px 12px 16px;
+  font-weight: 700;
+  margin-bottom: 44px;
+  &:hover {
+    background-color: rgb(245, 245, 245);
+  }
+}

@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h2 {
+    font-size: 36px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  a {
+    color: rgb(32, 113, 253);
+  }
+}
+.svg {
+  margin-top: 48px;
+  margin-bottom: 40px;
+}
+.p1 {
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.btn1 {
+  width: 390px;
+  padding: 9px 0px 9px 0px;
+  margin-bottom: 16px;
+  border: 2px solid rgb(76, 138, 244);
+  color: rgb(76, 138, 244);
+  background-color: white;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 5px;
+  // Center the SVG in alignment with the text
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 30%);
+  }
+}
+.btn2 {
+  width: 390px;
+  padding: 9px 0px 9px 0px;
+  margin-bottom: 12px;
+  border: 2px solid black;
+  color: black;
+  background-color: white;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 5px;
+  margin-bottom: 24px;
+  // Center the SVG in alignment with the text
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 30%);
+  }
+}
+.miniSVG {
+  margin-right: 20px;
+}
+.p2 {
+  font-size: 15px;
+  margin-bottom: 24px;
+  &:after,
+  &:before {
+    content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+    text-decoration: line-through;
+    color: rgb(189, 185, 185);
+    width: 390px;
+    overflow-x: hidden;
+  }
+}
+.inp {
+  width: 390px;
+  font-size: 18px;
+  padding: 11px 40px 13px 12px;
+  margin-bottom: 20px;
+}
+.btn3 {
+  color: white;
+  background-color: indigo;
+  width: 390px;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 12px 16px 12px 16px;
+  font-weight: 700;
+  margin-bottom: 44px;
+  &:hover {
+    background-color: rgb(97, 31, 105);
+  }
+}
+
+// The following places the labels to the left most part of the input field
+.left {
+  font-size: 15px;
+  align-self: flex-start;
+  padding-bottom: 8px;
+  font-weight: 450;
+}
+
+.container2 {
+  width: 390px;
+}
