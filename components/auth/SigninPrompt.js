@@ -3,17 +3,22 @@ import Slack from "../images/slack";
 import Google from "../images/google";
 import Github from "../images/github";
 import classes from "./SigninPrompt.module.scss";
+import { useSession, signIn, signOut } from "next-auth/react"
 
 function SignupPrompt() {
+  const { data: session } = useSession()
+  if(session) {
+    window.location.href = "/secret"
+  }
   return (
     <section className={classes.container}>
       <Slack className={classes.svg} />
       <h2>Sign into the account<br/> you exited</h2>
-      <button className={classes.btn1}>
+      <button onClick={()=> signIn()} className={classes.btn1}>
         <Google />
         &nbsp;&nbsp;Continue with Google
       </button>
-      <button className={classes.btn2}>
+      <button onClick={()=> signIn()} className={classes.btn2}>
         <Github />
         &nbsp;&nbsp;Continue with Github
       </button>

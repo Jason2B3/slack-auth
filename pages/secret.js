@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSession } from "next-auth/client";
+import { getSession, signOut } from "next-auth/client";
 
 export default function UserProfile() {
   // Create/manage your own loading and session states
@@ -19,11 +19,13 @@ export default function UserProfile() {
     };
     confirmSession();
   }, []);
+  const logoutHandler = () => signOut();
 
   if (isLoading) return <p className={classes.profile}>Loading...</p>;
   return (
     <section className={classes.profile}>
-      <h1>We are currently {loadedSession && "logged in"}</h1>
+      <h1>We are currently {loadedSession && "signed in"}</h1>
+      <button onClick={logoutHandler}>Sign out</button>
     </section>
   );
 }
