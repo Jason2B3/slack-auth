@@ -1,11 +1,16 @@
 import React from "react";
 import SigninPrompt from "../components/auth/SigninPrompt";
-import loginCheckSSR from "../helpers/loginCheckSSR";
+import { loginCheckSSR } from "./api/auth/loginCheck2";
+import handler from "./api/auth/loginCheck2";
 
 export async function getServerSideProps(context) {
-  const response = await loginCheckSSR(context); // {online:Boolean}
-  const loggedIn = response.online;
-  if (loggedIn) {
+  // Call a helper function to getSession without boiler plate
+  // response equals a session object, or null
+  const getSeshParam = { req: context.req };
+  const response = await loginCheckSSR(getSeshParam); // {online:Boolean}
+  console.log(response, "HERE");
+
+  if (response) {
     return {
       redirect: {
         destination: "/secret",
@@ -14,12 +19,12 @@ export async function getServerSideProps(context) {
     };
   }
   return {
-    props: { loggedIn },
+    props: { offline: true },
   };
 }
 
-function signin({ loggedIn }) {
-  console.log(loggedIn);
+function signin(props) {
+  console.log(props);
   return <SigninPrompt />;
 }
 
