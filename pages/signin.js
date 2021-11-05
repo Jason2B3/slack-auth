@@ -1,18 +1,25 @@
 import React from "react";
 import SigninPrompt from "../components/auth/SigninPrompt";
-import { callVerification } from "./api/loginCheck";
+import loginCheckSSR from "../helpers/loginCheckSSR";
 
 export async function getServerSideProps(context) {
-  const response = await callVerification();
-  const parsed= await response.json()
+  const response = await loginCheckSSR(context); // {online:Boolean}
+  const loggedIn = response.online;
+  if (loggedIn) {
+    return {
+      redirect: {
+        destination: "/secret",
+        permanent: false,
+      },
+    };
+  }
   return {
-    props: { online: parsed },
-    // no need for revalidate since SSR will fire again after each new request
+    props: { loggedIn },
   };
 }
 
-function signin({ online }) {
-  console.log(online);
+function signin({ loggedIn }) {
+  console.log(loggedIn);
   return <SigninPrompt />;
 }
 

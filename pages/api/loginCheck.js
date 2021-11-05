@@ -14,10 +14,4 @@ export default async function handler(req, res) {
   }
 };
 
-// We shouldn't fetch() in getServerSideProps, 
-// but we can call a helper function inside it that does fetch
-export async function callVerification(){
-  const request = await fetch("/api/loginCheck");
-  const res = await request.json();
-  return res
-} //! Why are we getting an error about absolute URL's?
+
