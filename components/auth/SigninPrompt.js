@@ -3,13 +3,10 @@ import Slack from "../images/slack";
 import Google from "../images/google";
 import Github from "../images/github";
 import classes from "./SigninPrompt.module.scss";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { getSession, signIn, signOut } from "next-auth/react";
 
+// This component won't render if we are logged in (will be redirected to /secret)
 function SignupPrompt() {
-  const { data: session } = useSession();
-  if (session) {
-    window.location.href = "/secret";
-  }
   //% Link to OAuth provider using signIn("google") or something
   return (
     <section className={classes.container}>
