@@ -5,7 +5,6 @@ export default function UserProfile() {
   // Create/manage your own loading and session states
   const [isLoading, setIsLoading] = useState(true);
   const [loadedSession, setLoadedSession] = useState(null);
-  console.log(isLoading, loadedSession);
 
   //% If we are not logged in, redirect to /signi9n
   useEffect(() => {
