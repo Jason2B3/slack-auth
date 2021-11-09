@@ -7,7 +7,7 @@ function ProfileForm() {
   console.log(loadedSession);
   //! Should look different depending on our login method
   // Password change should only appear when we login with credentials
-  // Should not appear if we login with OAuth
+  // Represented by authMethod: "credentials" in context API
 
   //——————————————————————————————————————————————————————
   // Define refs to place the field inputs into our PATCH request

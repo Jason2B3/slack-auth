@@ -1,9 +1,12 @@
 import { connectToDatabase } from "../../../helpers/db";
-import { hashPW } from "../../../helpers/auth";
+import { hashPW } from "../../../../helpers/auth";
 // If the user submitted the correct 6 digit PIN, create an account 
 export default async function handler(req, res) {
 
   if ((req.method = "POST")) {
+    const { email, password } = req.body;
+    const hashedPassword = await hashPW(password); // hash the password before storage
+
     // Connect to DB and grab the session
     const client = await connectToDatabase();
     const db = client.db();

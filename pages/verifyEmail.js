@@ -2,12 +2,17 @@
 //# https://www.npmjs.com/package/react-pin-input
 import React, { useRef } from "react";
 import PinInput from "react-pin-input";
+import { hashPW } from "../helpers/auth";
 import Slack from "../components/images/slack";
 import classes from "../components/auth/verifyEmail.module.scss";
 
 //! Use global context to only render this page if a certain state value is active
 //! Otherwise redirect to /
 
+//% See if the PIN the user inputs is correct
+//% We stored a hashed version of the correct PIN in signup.js
+//% Make it so we have only 1 try
+//% Give a retry option if the user fucks it up
 function verifyEmail() {
   return (
     <section className={classes.container}>

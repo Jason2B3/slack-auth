@@ -8,25 +8,25 @@ import Github from "../components/images/github";
 import classes from "../components/auth/signin.module.scss";
 import useRedirectWhenOnline from "../helpers/hooks/useRedirectWhenOnline";
 
-export async function getServerSideProps(context) {
-  // Call a helper function to getSession without boiler plate
-  // response equals a session object, or null
-  const getSeshParam = { req: context.req };
-  const response = await loginCheckSSR(getSeshParam);
-  // If we're logged in, redirect to /secret
-  if (response) {
-    return {
-      redirect: {
-        destination: "/secret",
-        permanent: false,
-      },
-    };
-  }
-  // If we're offline, then we let this page be visible
-  return {
-    props: { offline: true },
-  };
-}
+// export async function getServerSideProps(context) {
+//   // Call a helper function to getSession without boiler plate
+//   // response equals a session object, or null
+//   const getSeshParam = { req: context.req };
+//   const response = await loginCheckSSR(getSeshParam);
+//   // If we're logged in, redirect to /secret
+//   if (response) {
+//     return {
+//       redirect: {
+//         destination: "/secret",
+//         permanent: false,
+//       },
+//     };
+//   }
+//   // If we're offline, then we let this page be visible
+//   return {
+//     props: { offline: true },
+//   };
+// }
 
 // This component won't render if we are logged in (will be redirected to /secret)
 function signin() {
@@ -50,6 +50,7 @@ function signin() {
     <section className={classes.container}>
       <Slack className={classes.svg} />
       <h2>SIGN IN PAGE</h2>
+
       <button onClick={() => signIn("google")} className={classes.btn1}>
         <Google />
         &nbsp;&nbsp;Continue with Google
@@ -58,6 +59,7 @@ function signin() {
         <Github />
         &nbsp;&nbsp;Continue with Github
       </button>
+      
       <span className={classes.p2}> OR </span>
       <form className={`${classes.container} ${classes.container2}`}>
         <label className={classes.left}>Email Address</label>

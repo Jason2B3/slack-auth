@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "mongodb": "^4.1.4",
     "next": "12.0.1",
     "next-auth": "^4.0.0-beta.6",
@@ -22,4 +23,5 @@
     "eslint": "7",
     "eslint-config-next": "12.0.1"
   }
+  
 }

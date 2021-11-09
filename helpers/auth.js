@@ -1,4 +1,4 @@
-import { compare, hash } from "bcryptjs";
+import { compare, hash } from "bcrypt";
 
 // Hash a password before we store it in the DB
 export async function hashPW(password) {
