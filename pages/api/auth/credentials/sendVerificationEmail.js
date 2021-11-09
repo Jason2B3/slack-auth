@@ -21,15 +21,36 @@ export default async function handler(req, res) {
     // Create a 6 digit PIN and hash it
     var charSet = new securePin.CharSet();
     charSet.addUpperCaseAlpha().addNumeric().randomize();
-    const PIN = securePin.generateStringSync(6, charSet);
+    const PIN = await securePin.generateStringSync(6, charSet);
     const hashedPIN = await hashPW(PIN);
-    
-    //% Send an email to the submitted address with the unhashed PIN
-    //% here
 
+    //% Send an email to the submitted address with the unhashed PIN
+    const emailData = {
+      service_id: process.env.EMAILJS_SERVICE_ID,
+      template_id: process.env.EMAILJS_TEMPLATE_ID,
+      user_id: process.env.EMAILJS_USER_ID,
+      template_params: {
+        message: PIN, // pin will be a part of the email
+        target: email, // address to send email to
+        reply_to: "no one", // a param we need for the email (See template)
+      },
+    };
+    const sendEmailReq = await fetch(
+      "https://api.emailjs.com/api/v1.0/email/send",
+      {
+        method: "POST",
+        body: JSON.stringify(emailData),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    // const emailAPIResponse = await JSON.parse(sendEmailReq);
+    console.log(sendEmailReq);
+    // if(sendEmailReq){
+
+    // }
     // Return hashed PIN to the front end so you can store it in auth-context.js
     client.close();
-    res.status(201).json({ message: "Sent a verification email", hashedPIN });
+    res.status(201).json({ message: "Sent a verification email", hashedPIN, sendEmailReq });
   }
 }
 //! WARNING: No error handling here yet
