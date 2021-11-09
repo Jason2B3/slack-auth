@@ -1,20 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Slack from "../images/slack";
 import Google from "../images/google";
 import Github from "../images/github";
 import classes from "./SigninPrompt.module.scss";
 import { getSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
+import useRedirectWhenOnline from "../../helpers/hooks/useRedirectWhenOnline";
 
 // This component won't render if we are logged in (will be redirected to /secret)
 function SignupPrompt() {
-  //% Link to OAuth provider using signIn("google") or something
+  // If online, redirect to /secret
+  const { isLoading, loadedSession } = useRedirectWhenOnline("/secret");
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  async function submitHandler(e) {
+    const enteredEmail = emailRef.current.value;
+    const enteredPassword = passwordRef.current.value;
+    const result = await signIn("credentials", {
+      // prevents authorize FN from redirecting to a new page if an error occurs
+      redirect: false,
+      email: enteredEmail, // will equal credentials.email in the backend
+      password: enteredPassword, // will equal credentials.password in the backend
+    });
+    console.log(result); // just log how our login went for now
+  }
+
   return (
     <section className={classes.container}>
       <Slack className={classes.svg} />
-      <h2>
-        Sign into the account
-        <br /> you exited
-      </h2>
+      <h2>SIGN IN PAGE</h2>
       <button onClick={() => signIn("google")} className={classes.btn1}>
         <Google />
         &nbsp;&nbsp;Continue with Google
@@ -24,21 +38,31 @@ function SignupPrompt() {
         &nbsp;&nbsp;Continue with Github
       </button>
       <span className={classes.p2}> OR </span>
-      <div className={`${classes.container} ${classes.container2}`}>
+      <form className={`${classes.container} ${classes.container2}`}>
         <label className={classes.left}>Email Address</label>
-        <input className={classes.inp} placeholder="name@work-email.com" />
+        <input
+          ref={emailRef}
+          className={classes.inp}
+          placeholder="name@work-email.com"
+        />
+
         <label className={classes.left}>Password</label>
-        <input className={classes.inp} placeholder="Your Password" />
-        <button className={classes.btn3}>Continue</button>
-      </div>
+        <input
+          ref={passwordRef}
+          className={classes.inp}
+          placeholder="Your Password"
+        />
+
+        <button onClick={submitHandler} className={classes.btn3}>
+          Continue
+        </button>
+      </form>
       <p>
-        Have no account? <a href="/signin">Sign up now!</a>
+        Have no account? <Link href="/signup">Sign up now!</Link>
       </p>
       <p>
-        Forgot your password? <a>Get help signing in</a>
-      </p>
-      <p>
-        Looking for another workspace? <a>Find your workspaces</a>
+        Forgot your password?{" "}
+        <Link href="/forgotpassword">Get help signing in</Link>
       </p>
     </section>
   );

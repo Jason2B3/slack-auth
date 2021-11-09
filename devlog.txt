@@ -1,12 +1,12 @@
 LEFTOVER TASKS
 
-components/SignupPrompt.js and CheckEmail2.js
-Make this <a> link the user to another page
+/secret
+Render different content depending on your loginType
 
+/verifyEmail
+Use global context to only render this page if a certain state value is active
+Otherwise redirect to /
 
-NOTEWORTHY FILES
-/helpers/hooks/useLoginCheck
-Reusable code that lets you check if you're logged in with a single line of code
-Is the client-side equivalent to the new Next.js 12 function that runs on every page
-export function middleware is like getServerSideProps applied to every page automatically
-https://youtu.be/lRQ5z7i7pxE?t=113
+// ERROR HANDLING NEEDED
+
+/api/auth/credentials/signup

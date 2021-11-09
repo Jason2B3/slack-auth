@@ -21,7 +21,7 @@ function CheckEmail1() {
           initialValue=""
           secret
           onChange={(value, index) => {
-            //! value is the value of all entered chars in sequence
+            //% value is the value of all entered chars in sequence
             console.log(value)
           }}
           type="string"

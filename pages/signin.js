@@ -1,12 +1,12 @@
 import React from "react";
 import SigninPrompt from "../components/auth/SigninPrompt";
-import { loginCheckSSR } from "./api/auth/loginCheck";
+import { loginCheckSSR } from "../helpers/loginCheckSSR";
 
 export async function getServerSideProps(context) {
   // Call a helper function to getSession without boiler plate
   // response equals a session object, or null
   const getSeshParam = { req: context.req };
-  const response = await loginCheckSSR(getSeshParam); 
+  const response = await loginCheckSSR(getSeshParam);
   // If we're logged in, redirect to /secret
   if (response) {
     return {

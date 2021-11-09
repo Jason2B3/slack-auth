@@ -1,8 +1,9 @@
-import React from "react";
-import Slack from "../images/slack";
-import classes from "./NoPW.module.scss";
+import React from 'react'
+import NoPW from "../components/auth/NoPW"
+import Slack from '../components/images/slack';
+import classes from "../components/auth/NoPW.module.scss";
 
-export default function NoPW() {
+function nopassword() {
   return (
     <section className={classes.container}>
       <Slack />
@@ -14,10 +15,9 @@ export default function NoPW() {
         <label className={classes.left}>Email Address</label>
         <input className={classes.inp} placeholder="name@work-email.com" />
       </div>
-      <button className={classes.btn3}>Continue</button>
-
-      <span className={classes.p2}> OR </span>
-      <button className={classes.btn4}>Reset your password</button>
+      <button className={classes.btn3}>Reset your password</button>
     </section>
   );
 }
+
+export default nopassword

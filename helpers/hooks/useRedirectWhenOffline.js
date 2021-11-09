@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
-export default function useLoginCheck() {
+export default function useLoginCheck(redirectPath) {
+  const router = useRouter();
   // Create and manage your own loading and session states
   const [isLoading, setIsLoading] = useState(true);
   const [loadedSession, setLoadedSession] = useState(null);
@@ -10,8 +12,10 @@ export default function useLoginCheck() {
     const confirmSession = async function () {
       const session = await getSession(); // falsy if we aren't logged in
       setLoadedSession(session); // update our session state
-      setIsLoading(false); // update our loading state (we're done now)
-      // session equals null or a session object
+      // WARNING: this method of redirecting resets our app (all state lost)
+      if (!session) {
+        router.push(redirectPath);
+      } else setIsLoading(false); // update our loading state (we're done now)
     };
     confirmSession();
   }, []);
