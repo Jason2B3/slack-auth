@@ -1,24 +1,12 @@
 import { connectToDatabase } from "../../../helpers/db";
 import { hashPW } from "../../../helpers/auth";
-//# API Route file
+// If the user submitted the correct 6 digit PIN, create an account 
 export default async function handler(req, res) {
+
   if ((req.method = "POST")) {
-    // Extract data from the request body
-    const { email, password } = req.body;
-    const hashedPassword = await hashPW(password); // hash the password before storage
-    // Access db instance
+    // Connect to DB and grab the session
     const client = await connectToDatabase();
     const db = client.db();
-    // Check if a user with the submitted email exists already
-    const existingUser = await db.collection("users").findOne({ email: email });
-    if (existingUser) {
-      res
-        .status(422)
-        .json({ message: "Account with this email exists already" });
-      client.close();
-      return;
-    }
-    //% Send an email to the submitted address with a 6 digit PIN
     // Enter the "users" collection to make a new account doc
     const result = await db.collection("users").insertOne({
       email,
@@ -30,3 +18,5 @@ export default async function handler(req, res) {
     //! WARNING: No error handling here yet
   }
 }
+
+

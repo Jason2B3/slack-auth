@@ -1,12 +1,12 @@
 LEFTOVER TASKS
 
-/secret
+/secret.js
 Render different content depending on your loginType
 
-/verifyEmail
+/verifyEmail.js
 Use global context to only render this page if a certain state value is active
 Otherwise redirect to /
+Create a state for "pending valid email"
 
 // ERROR HANDLING NEEDED
-
 /api/auth/credentials/signup
