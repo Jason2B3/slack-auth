@@ -18,6 +18,6 @@ export default function useLoginCheck() {
   return { isLoading, loadedSession };
 }
 
-//# How we use the custom hook on the client-side
-// isLoading=true (loading)   isLoading=false (not loading)
+//# How we use the custom hook on the client-side. IF...
+// isLoading=true (we are loading)   isLoading=false (we are not loading)
 // loadedSession=falsy (offline)    loadedSession= session-object (online)

@@ -5,7 +5,6 @@ import Google from "../components/images/google";
 import Github from "../components/images/github";
 import classes from "../components/auth/signin.module.scss";
 import useRedirectWhenOnline from "../helpers/hooks/useRedirectWhenOnline";
-
 // This component won't render if we are logged in (will be redirected to /secret)
 export default function signin() {
   // If online, redirect to /secret
@@ -14,6 +13,7 @@ export default function signin() {
   const signInHandler = function (e) {
     const providerName = e.target.title; // get provider name
     localStorage.setItem("provider", providerName);
+    //% Make an API Route request to create new account info
     signIn(providerName);
   };
   return (
@@ -32,5 +32,3 @@ export default function signin() {
     </section>
   );
 }
-
-
