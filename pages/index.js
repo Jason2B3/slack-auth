@@ -19,8 +19,6 @@ export default function Home(props) {
       <h1>Login status: {!loadedSession ? "offline" : "online"}</h1>
       {!loadedSession && <button onClick={() => signIn()}>Sign in</button>}
       {loadedSession && <button onClick={() => signOut()}>Sign out</button>}
-      <Link href="/signin">Visit login page</Link>
-      <Link href="/signup">Visit sign up page</Link>
       <Link href="/secret">Visit secret page- only works when logged in</Link>
     </div>
   );

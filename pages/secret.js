@@ -1,49 +1,41 @@
 import React, { useRef, useEffect, useState } from "react";
-import useRedirectWhenOffline from "../helpers/hooks/useRedirectWhenOffline";
-import classes from "../components/auth/secret.module.scss";
+import { signOut } from "next-auth/react";
+import { loginCheckSSR } from "../helpers/loginCheckSSR";
+// import classes from "../components/auth/secret.module.scss";
 
-function ProfileForm() {
-  const { isLoading, loadedSession } = useRedirectWhenOffline("/");
-  console.log(loadedSession);
-  //! Should look different depending on our login method
-  // Password change should only appear when we login with credentials
-  // Represented by authMethod: "credentials" in context API
-
-  //——————————————————————————————————————————————————————
-  // Define refs to place the field inputs into our PATCH request
-  const oldPasswordRef = useRef();
-  const newPasswordRef = useRef();
-
-  const changeHandler = async function (e) {
-    e.preventDefault();
-    // Make a PATCH request to change-password.js's API route
-    const response = await fetch(`/api/user/change-password`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        oldPassword: oldPasswordRef.current.value,
-        newPassword: newPasswordRef.current.value,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-    // Use this to see the JSON message we get back
-    console.log(await response.json());
+export async function getServerSideProps(context) {
+  // Call a helper function to getSession without boiler plate
+  // response equals a session object, or null
+  const getSeshParam = { req: context.req };
+  const response = await loginCheckSSR(getSeshParam);
+  // If we're not logged in, redirect to /
+  if (!response) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  // If we're offline, then we let this page be visible
+  return {
+    props: { online: true },
   };
-  return (
-    <form className={classes.form}>
-      <h1>Change Password:</h1>
-      <div className={classes.control}>
-        <label htmlFor="new-password">New Password</label>
-        <input type="password" id="new-password" ref={newPasswordRef} />
-      </div>
-      <div className={classes.control}>
-        <label htmlFor="old-password">Old Password</label>
-        <input type="password" id="old-password" ref={oldPasswordRef} />
-      </div>
-      <div className={classes.action}>
-        <button onClick={changeHandler}>Change Password</button>
-      </div>
-    </form>
-  );
 }
 
-export default ProfileForm;
+// The component function only runs when we're logged in
+export default function Secret() {
+  // Get the provider name we logged in with from context api
+  const providerName = localStorage.getItem("provider");
+  const signOutHandler = function () {
+    localStorage.removeItem("provider");
+    signOut();
+  };
+
+  return (
+    <div>
+      <p>Currently logged in with the following provider: {providerName}</p>
+      <button onClick={signOutHandler}>Sign off</button>
+    </div>
+  );
+}
