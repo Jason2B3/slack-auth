@@ -13,7 +13,7 @@ export default function signin() {
   const signInHandler = function (e) {
     const providerName = e.target.title; // get provider name
     localStorage.setItem("provider", providerName);
-    //% Make an API Route request to create new account info
+    
     signIn(providerName);
   };
   return (
